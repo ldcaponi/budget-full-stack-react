@@ -36,7 +36,7 @@ const signUp = (req, res) => {
   }
 
   pool.query(
-    "INSERT INTO users (name, email, password) VALUES ($1, $2, $3)",
+    "INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *",
     [name, email, password],
     (error, results) => {
       if (error) {
@@ -44,15 +44,20 @@ const signUp = (req, res) => {
         return res.status(500).send("Error with query");
       }
 
-      const newUserId = results.insertId;
-      const payload = { id: newUserId };
+      const newUser = results.rows[0];
+      const payload = { id: newUser.id };
       const token = jwt.sign(payload, process.env.APP_SECRET);
       return res.json({ message: "Success!", token });
     }
   );
 };
 
+const me = (req, res) => {
+  res.send(req.user);
+};
+
 module.exports = {
   login,
-  signUp
+  signUp,
+  me
 };

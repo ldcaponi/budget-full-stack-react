@@ -19,14 +19,6 @@ app.use(
 app.use("/api/auth", authRouter);
 app.use("/api/users", userRouter);
 
-app.get(
-  "/secret",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    res.send(req.user);
-  }
-);
-
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
 });
