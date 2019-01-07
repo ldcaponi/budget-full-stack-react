@@ -1,0 +1,32 @@
+{
+  "name": "budget",
+  "version": "1.0.0",
+  "description": "App to help track your expenses througout the week",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "Node.js",
+    "PostgreSQL",
+    "\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D",
+    "\u001b[C\u001b[",
+    "PostgreSQL",
+    "React"
+  ],
+  "author": "Louis Caponi <ldcaponi@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.4.0",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "pg": "^7.7.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  }
+}
