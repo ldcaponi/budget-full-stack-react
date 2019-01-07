@@ -16,4 +16,10 @@ router.post(
   expenseController.create
 );
 
+router.delete(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  expenseController.del
+);
+
 module.exports = router;

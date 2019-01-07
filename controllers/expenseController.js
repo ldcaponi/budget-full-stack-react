@@ -31,7 +31,24 @@ const create = (req, res) => {
   );
 };
 
+const del = (req, res) => {
+  const userId = req.user.id;
+  const { id } = req.body;
+
+  pool.query(
+    "DELETE FROM expenses WHERE id = $1 AND owner = $2",
+    [id, userId],
+    (error, results) => {
+      if (error) {
+        return res.status(500).send("Error with query");
+      }
+      res.status(200).send("Successfully deleted expense");
+    }
+  );
+};
+
 module.exports = {
   index,
-  create
+  create,
+  del
 };
