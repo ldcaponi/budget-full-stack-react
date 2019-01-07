@@ -8,6 +8,8 @@ const bodyParser = require("body-parser");
 const PORT = process.env.PORT || 4000;
 const userRouter = require("./routes/userRoutes");
 const authRouter = require("./routes/authRoutes");
+const expenseRouter = require("./routes/expenseRoutes");
+const categoryRouter = require("./routes/categoryRoutes");
 
 app.use(bodyParser.json());
 app.use(
@@ -17,6 +19,8 @@ app.use(
 );
 
 app.use("/api/auth", authRouter);
+app.use("/api/expenses", expenseRouter);
+app.use("/api/categories", categoryRouter);
 app.use("/api/users", userRouter);
 
 app.listen(PORT, () => {
