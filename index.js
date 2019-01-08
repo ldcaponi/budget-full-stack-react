@@ -11,6 +11,8 @@ const userRouter = require("./routes/userRoutes");
 const authRouter = require("./routes/authRoutes");
 const expenseRouter = require("./routes/expenseRoutes");
 const categoryRouter = require("./routes/categoryRoutes");
+const allocationRouter = require("./routes/allocationRoutes");
+const budgetRouter = require("./routes/budgetRoutes");
 
 app.use(bodyParser.json());
 app.use(
@@ -22,6 +24,8 @@ app.use(
 app.use("/api/auth", authRouter);
 app.use("/api/expenses", expenseRouter);
 app.use("/api/categories", categoryRouter);
+app.use("/api/allocations", allocationRouter);
+app.use("/api/budgets", budgetRouter);
 app.use("/api/users", userRouter);
 
 //set up to serve built clientsde files

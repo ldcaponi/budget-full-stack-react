@@ -1,0 +1,12 @@
+.Login {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .form-container {
+    padding: 30px;
+    border: 1px solid #eee;
+    border-radius: 3px;
+  }
+}

@@ -38,7 +38,10 @@ export const login = (data, history) => dispatch => {
     .catch(err => {
       localStorage.removeItem("token");
       removeAuthHeaders();
-      dispatch({ type: LOGIN_ERROR, payload: "Error logging in" });
+      dispatch({
+        type: LOGIN_ERROR,
+        payload: err.response.data.message || "Error logging in"
+      });
     });
 };
 
@@ -48,7 +51,7 @@ export const logout = () => dispatch => {
   dispatch({ type: LOGIN_ERROR, payload: "" });
 };
 
-export const signUp = data => dispatch => {
+export const signUp = (data, history) => dispatch => {
   dispatch({ type: SIGNUP_INIT });
   axios
     .post("/api/auth/signup", data)
@@ -59,11 +62,15 @@ export const signUp = data => dispatch => {
         setAuthHeaders(token);
       }
       dispatch({ type: SIGNUP_SUCCESS });
+      history.push("/");
     })
     .catch(err => {
       localStorage.removeItem("token");
       removeAuthHeaders();
-      dispatch({ type: SIGNUP_ERROR, payload: "Error signing up" });
+      dispatch({
+        type: SIGNUP_ERROR,
+        payload: err.response.data.message || "Error signing up"
+      });
     });
 };
 
@@ -72,12 +79,7 @@ export const getProfile = data => dispatch => {
   axios
     .get("/api/auth/me", data)
     .then(res => {
-      const token = res.data.token;
-
-      if (token) {
-        localStorage.setItem("token", token);
-      }
-      dispatch({ type: GET_PROFILE_SUCCESS });
+      dispatch({ type: GET_PROFILE_SUCCESS, payload: res.data });
     })
     .catch(err => {
       localStorage.removeItem("token");

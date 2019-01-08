@@ -1,8 +1,9 @@
 import React from "react";
-import { Button, Form } from "semantic-ui-react";
+import { Button, Form, Message } from "semantic-ui-react";
 import { login } from "../ducks/authDuck";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import "./Login.scss";
 
 class Login extends React.Component {
   state = {
@@ -22,34 +23,39 @@ class Login extends React.Component {
 
   render() {
     const { email, password } = this.state;
-    const { loginLoading } = this.props;
+    const { loginLoading, loginError } = this.props;
     return (
       <div className="Login">
-        <Form loading={loginLoading}>
-          <Form.Field>
-            <label>Email</label>
-            <input
-              onChange={this.handleChange}
-              name="email"
-              value={email}
-              placeholder="Email"
-            />
-          </Form.Field>
-          <Form.Field>
-            <label>Password</label>
-            <input
-              onChange={this.handleChange}
-              name="password"
-              type="password"
-              value={password}
-              placeholder="Password"
-            />
-          </Form.Field>
+        <div className="form-container">
+          <Form loading={loginLoading} error={!!loginError}>
+            <h2>Login</h2>
+            <Form.Field>
+              <label>Email</label>
+              <input
+                onChange={this.handleChange}
+                name="email"
+                value={email}
+                placeholder="Email"
+              />
+            </Form.Field>
+            <Form.Field>
+              <label>Password</label>
+              <input
+                onChange={this.handleChange}
+                name="password"
+                type="password"
+                value={password}
+                placeholder="Password"
+              />
+            </Form.Field>
 
-          <Button onClick={this.submit} type="button">
-            Submit
-          </Button>
-        </Form>
+            <Message error header="Error" content={loginError} />
+
+            <Button onClick={this.submit} type="button">
+              Submit
+            </Button>
+          </Form>
+        </div>
       </div>
     );
   }

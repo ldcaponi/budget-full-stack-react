@@ -10,7 +10,7 @@ const login = (req, res) => {
     [email],
     (error, results) => {
       if (error) {
-        return res.status(500).send("Error with query");
+        return res.status(500).send({ message: "Error with query" });
       }
 
       const rows = results.rows;
@@ -35,9 +35,13 @@ const login = (req, res) => {
 };
 
 const signUp = (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, confirmPassword } = req.body;
   if (!name || !email || !password) {
-    return res.status(403).message("Missing information");
+    return res.status(403).send({ message: "Missing information" });
+  }
+
+  if (password !== confirmPassword) {
+    return res.status(401).send({ message: "Passwords must match" });
   }
 
   bcrypt.hash(password, 10, (err, hash) => {
@@ -50,7 +54,7 @@ const signUp = (req, res) => {
       (error, results) => {
         if (error) {
           console.log(error);
-          return res.status(500).send("Error with query");
+          return res.status(500).send({ message: "Error with query" });
         }
 
         const newUser = results.rows[0];
