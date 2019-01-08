@@ -1,0 +1,11 @@
+.Home {
+  min-height: calc(100vh - 100px);
+  position: relative;
+  padding: 30px;
+  .no-budgets {
+    text-align: center;
+    button {
+      margin-top: 20px;
+    }
+  }
+}

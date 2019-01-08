@@ -1,8 +1,10 @@
 .Navbar {
+  background-color: lighten(#2185d0, 10);
   a {
     display: inline-block;
     font-size: 18px;
     padding: 20px 10px;
+    color: white;
   }
 
   &__image {

@@ -21,7 +21,7 @@ const create = (req, res) => {
 
   pool.query(
     "INSERT INTO budget (owner_id, name, amount, start_day) VALUES ($1, $2, $3, $4)  RETURNING *",
-    [id, name, Number(amount), Number(start_day)],
+    [id, name, Number(amount), Number(startDay)],
     (error, results) => {
       if (error) {
         console.log(error);
