@@ -12,18 +12,22 @@ const login = (req, res) => {
         return res.status(500).send("Error with query");
       }
 
-      //fix this later with bcrypt
-      const user = results.rows[0];
-      if (user) {
-        if (password === user.password) {
-          const payload = { id: user.id };
-          const token = jwt.sign(payload, process.env.APP_SECRET);
-          return res.json({ message: "Success!", token });
-        } else {
-          return res.status(401);
+      const rows = results.rows;
+      console.log("ROWS", rows);
+      if (rows && rows.length > 0) {
+        const user = rows[0];
+        console.log("USER", user);
+        if (user) {
+          if (password === user.password) {
+            const payload = { id: user.id };
+            const token = jwt.sign(payload, process.env.APP_SECRET);
+            return res.send({ message: "Success!", token });
+          } else {
+            return res.status(401).send({ message: "Could not log in" });
+          }
         }
       } else {
-        return res.status(500).send("Could not find user");
+        return res.status(500).send({ message: "Could not find user" });
       }
     }
   );

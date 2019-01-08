@@ -16,6 +16,7 @@ router.post(
   expenseController.create
 );
 
+//body -- id
 router.delete(
   "/",
   passport.authenticate("jwt", { session: false }),

@@ -1,0 +1,19 @@
+.Navbar {
+  a {
+    display: inline-block;
+    font-size: 18px;
+    padding: 20px 10px;
+  }
+
+  &__image {
+    display: inline-block;
+  }
+
+  &__links-right {
+    float: right;
+    display: inline-block;
+  }
+  &__links-left {
+    display: inline-block;
+  }
+}
