@@ -8,11 +8,10 @@ class Navbar extends React.Component {
     const { isLoggedIn } = this.props;
     return (
       <div className="Navbar">
-        <div className="Navbar__image">IMG</div>
-        <div className="Navbar__links-left">
-          <Link to="/">Home</Link>
-
-          {isLoggedIn && <Link to="/dashboard">Dashboard</Link>}
+        <div className="Navbar__image">
+          <Link to={isLoggedIn ? "/" : "/login"}>
+            <img alt="LOGO" src="/assets/logo.png" />
+          </Link>
         </div>
 
         <div className="Navbar__links-right">

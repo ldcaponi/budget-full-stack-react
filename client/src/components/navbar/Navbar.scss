@@ -7,13 +7,13 @@
 
   &__image {
     display: inline-block;
+    img {
+      height: 30px;
+    }
   }
 
   &__links-right {
     float: right;
-    display: inline-block;
-  }
-  &__links-left {
     display: inline-block;
   }
 }
