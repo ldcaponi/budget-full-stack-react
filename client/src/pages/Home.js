@@ -2,7 +2,14 @@ import React from "react";
 import { connect } from "react-redux";
 import { getProfile } from "../ducks/authDuck";
 import { fetchBudgets } from "../ducks/budgetDuck";
-import { Button, Container, Modal, Card } from "semantic-ui-react";
+import {
+  Button,
+  Container,
+  Modal,
+  Card,
+  Dimmer,
+  Loader
+} from "semantic-ui-react";
 import CreateBudgetForm from "../components/forms/CreateBudgetForm";
 import BudgetCard from "../components/cards/BudgetCard";
 import "./Home.scss";
@@ -29,7 +36,7 @@ class Home extends React.Component {
     this.props.fetchBudgets();
   };
   render() {
-    const { budgets } = this.props;
+    const { budgets, budgetsLoading } = this.props;
     const { budgetModalIsOpen } = this.state;
     const createBudgetButtonWithModal = (
       <Modal
@@ -52,6 +59,9 @@ class Home extends React.Component {
     );
     return (
       <Container>
+        <Dimmer active={budgetsLoading}>
+          <Loader />
+        </Dimmer>
         <div className="Home">
           <div className="greeting">Hello, {this.props.userProfile.name}!</div>
           {budgets && budgets.length > 0 && (
@@ -79,7 +89,8 @@ class Home extends React.Component {
 
 const mapStateToProps = state => ({
   userProfile: state.auth.userProfile,
-  budgets: state.budget.budgets
+  budgets: state.budget.budgets,
+  budgetsLoading: state.budget.budgetsLoading
 });
 const mapDispatchToProps = dispatch => ({
   getProfile: () => dispatch(getProfile()),

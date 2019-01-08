@@ -9,6 +9,12 @@ router.get(
   budgetController.index
 );
 
+router.get(
+  "/:budgetId",
+  passport.authenticate("jwt", { session: false }),
+  budgetController.get
+);
+
 router.post(
   "/",
   passport.authenticate("jwt", { session: false }),
