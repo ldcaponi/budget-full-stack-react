@@ -1,4 +1,5 @@
 const Pool = require("pg").Pool;
+const {initDBQuery} = require('./initDB');
 
 const pool = new Pool({
   user: process.env.DB_USER,
@@ -7,5 +8,10 @@ const pool = new Pool({
   password: process.env.DB_PASSWORD,
   port: process.env.DB_PORT
 });
+
+
+
+
+
 
 module.exports = pool;
